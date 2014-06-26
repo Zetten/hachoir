@@ -6,6 +6,7 @@
 
 from hachoir_core.tools import alignValue
 from hachoir_core.stream.input import FileFromInputStream
+from shutil import copyfileobj
 
 def field_index(field_set, field):
     return field_set._fields.index(field._getName())
@@ -38,6 +39,6 @@ def convert_size(from_field, to_type):
 def save_substream_to_disk(field, dest_path):
     dest_stream = open(dest_path, 'wb')
     f = FileFromInputStream(field.getSubIStream())
-    dest_stream.write(f.read())
+    copyfileobj(f, dest_stream)
     dest_stream.close()
 
