@@ -54,7 +54,7 @@ def main():
     SCRIPTS = ["hachoir-metadata", "hachoir-metadata-gtk"]
     PACKAGES = ["hachoir_metadata"]
 
-    if "--disable-qt" not in sys.argv:
+    if "--enable-qt" in sys.argv:
         from subprocess import call
         SCRIPTS.append("hachoir-metadata-qt")
         dialog = "hachoir_metadata/qt/dialog"
@@ -75,8 +75,6 @@ def main():
                 print >>sys.stderr, 'pyuic4 is included in the PyQt4 development package'
                 sys.exit(1)
         PACKAGES.append("hachoir_metadata.qt")
-    else:
-        sys.argv.remove("--disable-qt")
 
     hachoir_metadata = load_source("version", path.join("hachoir_metadata", "version.py"))
     long_description = open('README').read() + open('ChangeLog').read()
